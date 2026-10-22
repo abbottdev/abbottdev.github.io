@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getPublishedPosts } from '../../lib/posts';
+
+const posts = await getPublishedPosts();
+---
+
+<BaseLayout title="Writing" description="Posts on architecture, building with AI, AI oversight and engineering leadership.">
+  <h1>Writing</h1>
+  <PostList posts={posts} />
+</BaseLayout>

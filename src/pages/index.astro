@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import { SITE_DESCRIPTION } from '../consts';
+import { getPublishedPosts } from '../lib/posts';
+
+const posts = (await getPublishedPosts()).slice(0, 5);
+---
+
+<BaseLayout>
+  <section class="intro">
+    <h1>Hi, I'm James.</h1>
+    <p class="lead">{SITE_DESCRIPTION}</p>
+    <p>
+      I've spent nearly 20 years building software, and I write about architecture, building with AI,
+      AI oversight, and Staff-level engineering leadership.
+    </p>
+  </section>
+  <section>
+    <h2>Recent writing</h2>
+    <PostList posts={posts} />
+    <p><a href="/blog/">All posts →</a></p>
+  </section>
+</BaseLayout>
