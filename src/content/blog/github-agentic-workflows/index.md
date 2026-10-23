@@ -85,7 +85,7 @@ So the agent doing the work never writes to the repo itself, and whoever marks i
 
 ### MCP scripts
 
-Because of this architecture you can use a technique that isn't well known: MCP scripts. They let you define custom actions you want the AI to execute that aren't an MCP server. For example, you might want the agent to run a `.sh` script without handing it a shell and hoping for the best:
+Because of this architecture you can use a technique that isn't well known: MCP scripts. They let you define custom tools the AI can call, without writing an MCP server. For example, you might want the agent to run a `.sh` script without handing it a shell and hoping for the best:
 
 ```yaml
 mcp-scripts:
@@ -140,7 +140,7 @@ mcp-servers:
 
 ## How else we use it
 
-We also use it for agentic review. It works well because the AI agent is pluggable, which means less operational risk and less vendor lock-in. Given there are only a handful of providers, putting all your eggs in one basket is a brave move. Switching is one line of frontmatter, which also keeps costs more competitive:
+We also use it for agentic review. It works well because the AI agent is pluggable, which means less operational risk and less vendor lock-in. Given there are only a handful of providers, putting all your eggs in one basket is a brave move. Switching is a couple of lines of frontmatter, which also keeps costs more competitive:
 
 ```yaml
 engine:
