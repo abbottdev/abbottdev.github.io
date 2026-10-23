@@ -1,11 +1,12 @@
 ---
 name: publish-post
-description: Publish a draft blog post on abbott.sh (remove draft flag, commit, push to master, confirm deploy) and offer to hand off to the cross-post skill. Use when the user says to publish, ship, or go live with a blog post.
+description: Publish a draft blog post on abbott.sh (proofread, remove draft flag, open a PR, confirm deploy after merge) and offer to hand off to the cross-post skill. Use when the user says to publish, ship, or go live with a blog post.
 ---
 
 # Publish a blog post
 
-Repo: `abbottdev.github.io` (deploys `abbott.sh` via GitHub Actions on push to `master`).
+Repo: `abbottships/abbottships.github.io` (deploys `abbott.sh` via GitHub Actions
+on push to `master`).
 
 ## Steps
 
@@ -13,34 +14,41 @@ Repo: `abbottdev.github.io` (deploys `abbott.sh` via GitHub Actions on push to `
    `src/content/blog/` for files with `draft: true` in frontmatter and ask which one
    if more than one matches.
 
-2. **Sanity-check the content.** Read the post. Flag anything obviously unfinished
-   (TODO markers, placeholder sentences, missing `description`). Don't block on
-   style — just flag anything that looks accidental.
+2. **Proofread.** Read the full post closely — not just a leftover-placeholder
+   check. Flag: typos, grammar, awkward or unclear phrasing, inconsistent
+   terminology, claims that read like they need a second look, and structural
+   issues (a section that doesn't land, a missing conclusion). Also flag anything
+   obviously unfinished (TODO markers, empty `description`, placeholder sentences).
+   Present findings as a list of suggestions, not silent edits — the user decides
+   which to accept. Apply only the ones they approve.
 
 3. **Remove the draft flag.** Delete the `draft: true` line (or set it to `false`,
    matching the existing convention in the file) from the frontmatter. Confirm the
    `pubDate` is sensible (today or the intended date).
 
 4. **Build check.** Run `npm run build` locally. If it fails, stop and report the
-   error — do not push a broken build.
+   error — do not open a PR with a broken build.
 
-5. **Confirm before pushing.** Show the user the diff and the post's live URL it
-   will get (`https://abbott.sh/blog/<slug>/`). Pushing to `master` triggers a real
-   deploy — get an explicit go-ahead before committing/pushing, same as any other
-   push to this repo.
+5. **Confirm before pushing.** Show the user the diff and the post's eventual live
+   URL (`https://abbott.sh/blog/<slug>/`). Get an explicit go-ahead before creating
+   a branch/commit/PR, same as any other push to this repo.
 
-6. **Commit and push to `master`.** Use a plain, factual commit message (e.g.
-   `Publish "<post title>"`). Push directly — this repo deploys straight from
-   `master`, there's no PR/review step in the current workflow.
+6. **Branch, commit, and open a PR.** Create a branch (e.g. `post/<slug>`), commit
+   with a plain factual message (e.g. `Publish "<post title>"`), push the branch,
+   and open a PR with `gh pr create` summarizing what's being published. Do **not**
+   push directly to `master` and do **not** merge the PR yourself — merging is the
+   user's final go/no-go, separate from drafting the PR.
 
-7. **Confirm the deploy succeeded.** Check the latest Actions run for this repo
-   (`gh run list --repo abbottships/abbottships.github.io --limit 1`) and report
-   success/failure. If the GitHub Pages "Deploy from a branch" vs "GitHub Actions"
-   source setting ever reverts, see the `cross-post` skill's notes — that's a known
-   failure mode that silently blocks deploys (deploy job rejected with "Deployments
-   are only allowed from gh-pages").
+7. **Stop and hand back.** Give the user the PR URL and stop. Deploy only fires
+   once they merge it (push to `master` triggers the Actions workflow). If they
+   ask you to check deploy status after merging, use
+   `gh run list --repo abbottships/abbottships.github.io --limit 1`. If the GitHub
+   Pages "Deploy from a branch" vs "GitHub Actions" source setting ever reverts,
+   see the `cross-post` skill's notes — that's a known failure mode that silently
+   blocks deploys (deploy job rejected with "Deployments are only allowed from
+   gh-pages").
 
-8. **Offer to cross-post.** Once live, ask if the user wants to invoke the
-   `cross-post` skill with the post's title, description, and canonical URL. Don't
-   invoke it automatically — publishing the post and announcing it are separate
-   decisions.
+8. **Offer to cross-post.** Once the PR is merged and the deploy is confirmed,
+   ask if the user wants to invoke the `cross-post` skill with the post's title,
+   description, and canonical URL. Don't invoke it automatically, and don't invoke
+   it before the post is actually live.
