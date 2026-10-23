@@ -4,6 +4,6 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://abbott.dev',
+  site: 'https://abbott.sh',
   integrations: [mdx(), sitemap()],
 });

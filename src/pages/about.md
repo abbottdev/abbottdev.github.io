@@ -18,4 +18,4 @@ I write about four things:
 
 My examples come from trust and safety, security, real-world intelligence and tech for good.
 
-You can find my code on [GitHub](https://github.com/abbottdev).
+You can find my code on [GitHub](https://github.com/abbottships).

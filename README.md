@@ -1,6 +1,6 @@
-# abbott.dev
+# abbott.sh
 
-Personal site and blog for James Abbott, built with [Astro](https://astro.build) and deployed to GitHub Pages at [abbott.dev](https://abbott.dev).
+Personal site and blog for James Abbott, built with [Astro](https://astro.build) and deployed to GitHub Pages at [abbott.sh](https://abbott.sh).
 
 ## Writing a post
 
@@ -32,10 +32,10 @@ npm run build    # production build into dist/
 
 ## Custom domain
 
-`public/CNAME` sets the domain to `abbott.dev`. The DNS for `abbott.dev` needs:
+`public/CNAME` sets the domain to `abbott.sh`. The DNS for `abbott.sh` needs:
 
 - `A` records for the apex pointing to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
 - `AAAA` records pointing to `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`
-- Optionally a `CNAME` for `www` pointing to `abbottdev.github.io`
+- Optionally a `CNAME` for `www` pointing to `abbottships.github.io`
 
-In the repository's **Settings → Pages**, set the source to **GitHub Actions**, then add `abbott.dev` as the custom domain and tick **Enforce HTTPS**.
+In the repository's **Settings → Pages**, set the source to **GitHub Actions**, then add `abbott.sh` as the custom domain and tick **Enforce HTTPS**.
